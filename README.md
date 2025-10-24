@@ -1,42 +1,48 @@
 # FUCK ZB
 # 两轮差速 & 阿克曼
 
-## Compile jason_ws
+## Compile
+
+```
 $ cd jason_ws && catkin build
+```
 
-# INSTALL ROSDEPC
-$ wget http://fishros.com/install -O fishros && . fishros
+## Preparation
 
-$ sudo rosdepc init
+```
+wget http://fishros.com/install -O fishros && . fishros
+sudo rosdepc init
+rosdepc update
+rosdepc install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y
+```
 
-$ rosdepc update
+IF SHOW "cartographer: [libabsl-dev] defined as "not available" for OS version [focal]"
+THEN 在文件 cartographer_ws/src/cartographer/package.xmL 注释掉 <depend>libabsl-dev</depend> 并重新执行指令
 
-$ rosdepc install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y
-
-# IF SHOW "cartographer: [libabsl-dev] defined as "not available" for OS version [focal]"
-## THEN 在文件 cartographer_ws/src/cartographer/package.xmL 注释掉 <depend>libabsl-dev</depend> 并重新执行指令
-$ rosdepc install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y
-
-$ src/cartographer/scripts/install_abseil.sh
-
-$ sudo apt-get install libgmock-dev
-
-$ catkin_make_isolated --install --use-ninja
+```
+rosdepc install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y
+src/cartographer/scripts/install_abseil.sh
+sudo apt-get install libgmock-dev
+catkin_make_isolated --install --use-ninja
 
 # NOTICE:
 ## BEFORE EVERYTIME USE 
-$ cd cartographer_ws
 
-$ source install_isolated/setup.bash
+```
+cd cartographer_ws
+source install_isolated/setup.bash
+```
 
 # ONCE YOU CHANGING THE PARAMETERS OF <name>.lua
-$ cd cartographer_ws
 
-$ catkin_make_isolated --install --use-ninja
+```
+cd cartographer_ws
+catkin_make_isolated --install --use-ninja
+source install_isolated/setup.bash
+```
 
-$ source install_isolated/setup.bash
+## About Cartographer
 
-# TIPS:
 0 provide_odom_frame
 
 0.1 carto建图时一定会有的map_frame也就是map的tf，建图时carto本质上能得到的一般是map与base_link之间的位置关系,因为激光雷达和imu的tf与base_link一般是固定的，map即它建得的地图固定坐标系，而描述位置关系在ROS中一般就直接是两个坐标系的tf，
