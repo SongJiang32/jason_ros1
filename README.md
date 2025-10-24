@@ -4,7 +4,7 @@
 ## Compile after Preparation
 
 ```
-$ cd jason_ws && catkin build
+cd jason_ws && catkin build
 ```
 
 ## Preparation
@@ -17,6 +17,7 @@ rosdepc install --from-paths src --ignore-src --rosdistro=${ROS_DISTRO} -y
 ```
 
 > IF SHOW "cartographer: [libabsl-dev] defined as "not available" for OS version [focal]"
+> 
 > THEN 在文件 cartographer_ws/src/cartographer/package.xmL 注释掉 <depend>libabsl-dev</depend> 并重新执行指令
 
 ```
@@ -27,14 +28,14 @@ catkin_make_isolated --install --use-ninja
 ```
 
 > [!NOTE]
-## BEFORE EVERYTIME USE 
+> BEFORE EVERYTIME USE 
 
 ```
 cd cartographer_ws
 source install_isolated/setup.bash
 ```
 
-## ONCE YOU CHANGING THE PARAMETERS OF <name>.lua
+>> ONCE YOU CHANGING THE PARAMETERS OF <name>.lua
 
 ```
 cd cartographer_ws
